@@ -265,6 +265,10 @@ def _log(input_path, output_path, rect, confidence):
 
 SUPPORTED = {'.jpg', '.jpeg', '.tif', '.tiff', '.png'}
 
+def _process_image_star(args):
+    return process_image(*args)
+
+
 def batch_process(input_dir: Path, output_dir: Path, workers: int = 4,
                   debug: bool = False):
     files = [f for f in sorted(input_dir.iterdir())
@@ -282,7 +286,7 @@ def batch_process(input_dir: Path, output_dir: Path, workers: int = 4,
     args = [(f, output_dir / f.name, debug) for f in files]
 
     with ProcessPoolExecutor(max_workers=workers) as pool:
-        results = list(pool.map(lambda a: process_image(*a), args))
+        results = list(pool.map(_process_image_star, args))
 
     with open(log_path, 'w') as lf:
         for r in results:

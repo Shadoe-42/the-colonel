@@ -1,0 +1,20 @@
+# Output and debug files
+*_cropped.*
+*_debug.*
+*_mask.*
+logs/
+*.jsonl
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Review UI (coming soon)
+review/node_modules/
